@@ -123,15 +123,30 @@ f.close()
 
 sys.stderr.reconfigure(encoding='utf-8')
 
-command = "git add crawlingdata.csv"
+command = "git pull origin main"
 
 result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-
-print("-----------------------------------------------------")
-print("adding data to git")
-print("-----------------------------------------------------")
 
 print("result:\n", result.stdout)
 print("error:\n", result.stderr)
 
-print("finish")
+command = "git add crawlingdata.csv"
+
+result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+print("result:\n", result.stdout)
+print("error:\n", result.stderr)
+
+command = f"git commit -m '{date}'"
+
+result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+print("result:\n", result.stdout)
+print("error:\n", result.stderr)
+
+command = "git push origin main"
+
+result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+print("result:\n", result.stdout)
+print("error:\n", result.stderr)
