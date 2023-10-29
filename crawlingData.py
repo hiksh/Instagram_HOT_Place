@@ -17,13 +17,17 @@ chromedriver_autoinstaller.install()
 # open csv to store
 import csv
 
-try:
+
+if os.path.isfile('crawlingdata.csv'):
+    print("There is original file")
     f=open('crawlingdata.csv', 'a', newline='', encoding='utf-8')
     wr = csv.writer(f)
-except:
+else:
+    print("Make new file")
     f=open('crawlingdata.csv', 'w', newline='',encoding='utf-8')
     wr = csv.writer(f)
     wr.writerow(['date', 'img_alt', 'id', 'content'])
+    
 print("-----------------------------------------------------")
 print("Opening the csv file")
 print("-----------------------------------------------------")
@@ -46,7 +50,7 @@ driver.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[3]/button').click()
 time.sleep(10)
 
 # go hashtag page
-hastag = "서울홍대맛집"
+hastag = "제주맛집"
 hashtag_url = f"https://www.instagram.com/explore/tags/{hastag}/"
 driver.get(url = hashtag_url)
 
@@ -81,13 +85,28 @@ for c in range(3):
         print("Click the post")
         click = driver.find_element(By.XPATH, f'/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/div[2]/section/main/article/div/div/div/div[{r+1}]/div[{c+1}]/a/div[1]/div[2]')
         driver.execute_script("arguments[0].click();", click)
-        time.sleep(10)
+        time.sleep(5)
         print("Capture the id")
-        id=driver.find_element(By.XPATH, '/html/body/div[7]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a')
+        # time.sleep(1000)
+        try: 
+            id= driver.find_element(By.XPATH, '/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/h2/div/span/div/a')
+        except:
+            try:
+                id= driver.find_element(By.XPATH, '/html/body/div[7]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/h2/div/span/div/a')
+            except:
+                print("error")
+                time.sleep(1000)
         todayDatas[iter].append(id.text)
-        time.sleep(10)
+        time.sleep(5)
         print("Capture the content")
-        context=driver.find_element(By.XPATH, '/html/body/div[7]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/div[1]/h1')
+        try:
+            context=driver.find_element(By.XPATH, '/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/div[1]/h1')
+        except:
+            try:
+                context=driver.find_element(By.XPATH, '/html/body/div[7]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/div[1]/h1')
+            except:
+                print("error")
+                time.sleep(1000)
         todayDatas[iter].append(context.text)
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
         time.sleep(10)
