@@ -8,6 +8,8 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 import os
+import subprocess
+import sys
 from dotenv import load_dotenv
 
 import datetime
@@ -119,3 +121,17 @@ for row in todayDatas:
     
 f.close()
 
+sys.stderr.reconfigure(encoding='utf-8')
+
+command = "git add crawlingdata.csv"
+
+result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+print("-----------------------------------------------------")
+print("adding data to git")
+print("-----------------------------------------------------")
+
+print("result:\n", result.stdout)
+print("error:\n", result.stderr)
+
+print("finish")
