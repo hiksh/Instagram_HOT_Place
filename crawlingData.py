@@ -120,7 +120,10 @@ for row in todayDatas:
     wr.writerow(row)
     
 f.close()
+print("finish csv file")
+time.sleep(5)
 
+# github upload
 sys.stderr.reconfigure(encoding='utf-8')
 
 command = "git pull origin main"
