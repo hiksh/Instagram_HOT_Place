@@ -20,6 +20,7 @@ for idx, row in data.iterrows():
         ]
     )
 
+    #time.sleep(20) - try this!
     response= response.choices[0].message.content
     print(f"response in {idx}: {response}")
     row.loc["name"] = response
