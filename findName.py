@@ -3,7 +3,7 @@ import pandas as pd
 import time
 openai.api_key = input("Enter the API_KEY: ")
 
-data = pd.read_csv('crawlingdata.csv', index_col=0)
+data = pd.read_csv('crawlingdata.csv')
 
 data['name'] = ""
 
@@ -20,10 +20,10 @@ for idx, row in data.iterrows():
         ]
     )
 
-    #time.sleep(20) - try this!
+    time.sleep(20)
     response= response.choices[0].message.content
     print(f"response in {idx}: {response}")
     row.loc["name"] = response
     time.sleep(10)
 
-data.to_csv("crawlingdata.csv", mode='w')
+data.to_csv("crawlingdata.csv", mode='w', index=False)

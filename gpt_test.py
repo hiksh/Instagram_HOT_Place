@@ -25,7 +25,7 @@ def extract_name(data):
     
     return n_lst
 
-df=pd.read_csv('ex_clean_data.csv',index_col=0)
+df=pd.read_csv('ex_clean_data.csv')
 o_data=df[df["name"]!=""]
 ex_data=df[df["name"] == ""]
 name=[]
