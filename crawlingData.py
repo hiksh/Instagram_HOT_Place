@@ -22,11 +22,11 @@ import csv
 
 if os.path.isfile('crawlingdata.csv'):
     print("There is original file")
-    f=open('crawlingdata.csv', 'a', newline='', encoding='utf-8')
+    f=open('crawlingdata.csv', 'a', newline='', encoding='utf-8-sig')
     wr = csv.writer(f)
 else:
     print("Make new file")
-    f=open('crawlingdata.csv', 'w', newline='',encoding='utf-8')
+    f=open('crawlingdata.csv', 'w', newline='',encoding='utf-8-sig')
     wr = csv.writer(f)
     wr.writerow(['date', 'img_alt', 'id', 'content'])
     
