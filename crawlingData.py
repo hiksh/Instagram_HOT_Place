@@ -96,8 +96,11 @@ for c in range(3):
             try:
                 id= driver.find_element(By.XPATH, '/html/body/div[7]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/h2/div/span/div/a')
             except:
-                print("error")
-                time.sleep(1000)
+                try:
+                    id=driver.find_element(By.XPATH, '/html/body/div[8]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div[1]/li/div/div/div[2]/h2/div/span/div/a')
+                except:
+                    print("error")
+                    time.sleep(1000)
         todayDatas[iter].append(id.text)
         time.sleep(5)
         print("Capture the content")
@@ -107,8 +110,11 @@ for c in range(3):
             try:
                 context=driver.find_element(By.XPATH, '/html/body/div[7]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/div[1]/h1')
             except:
-                print("error")
-                time.sleep(1000)
+                try:
+                    context=driver.find_element(By.XPATH, '/html/body/div[8]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div[1]/li/div/div/div[2]/div[1]/h1')
+                except:
+                    print("error")
+                    time.sleep(1000)
         todayDatas[iter].append(context.text)
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
         time.sleep(10)
@@ -140,7 +146,7 @@ result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subp
 print("result:\n", result.stdout)
 print("error:\n", result.stderr)
 
-command = f"git commit -m '{date}'"
+command = f"git commit -m '{date}food'"
 
 result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
