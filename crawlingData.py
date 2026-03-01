@@ -1,4 +1,4 @@
-# import
+﻿# import
 from selenium import webdriver
 import chromedriver_autoinstaller
 import time
@@ -44,7 +44,7 @@ driver.implicitly_wait(5)
 
 insta_url = 'https://www.instagram.com/'
 driver.get(url=insta_url)
-time.sleep(2)
+time.sleep(5)
 driver.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys(id)
 driver.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys(password)
 time.sleep(1)
@@ -68,7 +68,10 @@ print(date)
 
 for c in range(3):
     for r in range(9):
-        textImg = driver.find_element(By.XPATH, f'/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/div[2]/section/main/article/div/div/div/div[{r+1}]/div[{c+1}]/a/div[1]/div[1]/img')
+        try:
+            textImg = driver.find_element(By.XPATH, f'/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/div[2]/section/main/article/div/div/div/div[{r+1}]/div[{c+1}]/a/div[1]/div[1]/img')
+        except:
+            time.sleep(1000)
         data=[date, textImg.get_attribute('alt')]
         todayDatas.append(data)
 
